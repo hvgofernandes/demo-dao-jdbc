@@ -35,5 +35,16 @@ public class Program {
         System.out.println("Inserted! New ID = " + newSeller.getId());
         System.out.println(newSeller); // No ToString() ele imprime a data completa
 
+        System.out.println("=== TEST 5: seller update ===");
+        // Na primeira vez que testei, deu DbException (tinha errado na SQL syntax), porém o interessante foi que, tudo
+        // antes da exceção foi executado, nesse tipo de caso, teriamos que usar o commit/rollback?
+        seller = sellerDao.findById(10);
+        seller.setName("Martha Waine");
+        seller.setEmail("martha@gmail.com");
+        seller.setBirthDate(new Date());
+        seller.setBaseSalary(3000.0);
+        // seller.setDepartment(department); Department só recebe objeto, porém como só quero atualizar os dados, não mexerei no departamento
+        sellerDao.update(seller);
+        System.out.println("Sucess! Update completed.");
     }
 }
