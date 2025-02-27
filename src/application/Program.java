@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Scanner;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entities.Department;
@@ -11,6 +12,8 @@ import java.util.Date;
 
 public class Program {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
         SellerDao sellerDao = DaoFactory.createSellerDao();
         System.out.println("=== TEST 1: seller findById ===");
         Seller seller = sellerDao.findById(4);
@@ -46,5 +49,13 @@ public class Program {
         // seller.setDepartment(department); Department só recebe objeto, porém como só quero atualizar os dados, não mexerei no departamento
         sellerDao.update(seller);
         System.out.println("Sucess! Update completed.");
+
+        System.out.println("=== TEST 6: seller delete ===");
+        System.out.println("Enter ID for delete test: ");
+        int id = sc.nextInt();
+        sellerDao.deleteById(id);
+        System.out.println("Sucess! Seller deleted.");
+
+        sc.close();
     }
 }
